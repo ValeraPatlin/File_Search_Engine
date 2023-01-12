@@ -1,4 +1,4 @@
-#include "../include/InvertedIndex.h"
+#include "InvertedIndex.h"
 
 InvertedIndex::InvertedIndex() = default;
 
@@ -17,9 +17,9 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
     for (const auto& content : input_docs)
     {
         std::thread index([this, &content, docId]()
-            {
-                index_file(content, docId);
-            });
+                          {
+                              index_file(content, docId);
+                          });
         ++docId;
         index.join();
     }
@@ -84,16 +84,16 @@ void InvertedIndex::index_file(const std::string& file_content, size_t id)
     for (std::string word; ss >> word; )
     {
         std::transform(word.begin(), word.end(),
-            word.begin(),
-            [](unsigned char c)
-            {
-                return std::tolower(c);
-            });
+                       word.begin(),
+                       [](unsigned char c)
+                       {
+                           return std::tolower(c);
+                       });
 
         std::pair<std::string, Entry> file_word_frequency
-        {
-            word, entry
-        };
+                {
+                        word, entry
+                };
 
         if (!dictionary.emplace(file_word_frequency).second)
         {
@@ -108,9 +108,9 @@ void InvertedIndex::index_file(const std::string& file_content, size_t id)
         word_count.first = word_it.first;
 
         std::vector<Entry> entry_vec
-        {
-            word_it.second
-        };
+                {
+                        word_it.second
+                };
 
         word_count.second = entry_vec;
 

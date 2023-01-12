@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <nlohmann/json.hpp>
+#include "nlohmann/json.hpp"
 
 using std::cout;
 using std::endl;
@@ -13,45 +13,48 @@ using js = nlohmann::json;
 
 struct Struct_Json_config
 {
-	std::string name = "file search";
-	double version = 0.1;
-	int max_responses = 5;
-	std::vector < std::string> files;
+    std::string name = "file search";
+    double version = 0.1;
+    int max_responses = 5;
+    std::vector < std::string> files;
 };
 
 class ConverterJSON
 {
 
 public:
-	ConverterJSON();
-	/**
-	* Метод получения содержимого файлов
-	* @return Возвращает список с содержимым файлов перечисленных
-	* в config.json
-	*/
-	std::vector<std::string> GetTextDocuments();
-	/**
-	* Метод считывает поле max_responses для определения предельного
-	* количества ответов на один запрос
-	* @return
-	*/
-	int GetResponsesLimit();
-	/**
-	* Метод получения запросов из файла requests.json
-	* @return возвращает список запросов из файла requests.json
-	*/
-	std::vector<std::string> GetRequests();
-	/**
-	* Положить в файл answers.json результаты поисковых запросов
-	*/
-	void putAnswers(std::vector<std::vector<std::pair<int, float>>>
-		answers);
+    ConverterJSON();
+    /**
+    * РњРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ С„Р°Р№Р»РѕРІ
+    * @return Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє СЃ СЃРѕРґРµСЂР¶РёРјС‹Рј С„Р°Р№Р»РѕРІ РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С…
+    * РІ config.json
+    */
+    std::vector<std::string> GetTextDocuments();
+    /**
+    * РњРµС‚РѕРґ СЃС‡РёС‚С‹РІР°РµС‚ РїРѕР»Рµ max_responses РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ РїСЂРµРґРµР»СЊРЅРѕРіРѕ
+    * РєРѕР»РёС‡РµСЃС‚РІР° РѕС‚РІРµС‚РѕРІ РЅР° РѕРґРёРЅ Р·Р°РїСЂРѕСЃ
+    * @return
+    */
+    int GetResponsesLimit();
+    /**
+    * РњРµС‚РѕРґ РїРѕР»СѓС‡РµРЅРёСЏ Р·Р°РїСЂРѕСЃРѕРІ РёР· С„Р°Р№Р»Р° requests.json
+    * @return РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє Р·Р°РїСЂРѕСЃРѕРІ РёР· С„Р°Р№Р»Р° requests.json
+    */
+    std::vector<std::string> GetRequests();
+    /**
+    * РџРѕР»РѕР¶РёС‚СЊ РІ С„Р°Р№Р» answers.json СЂРµР·СѓР»СЊС‚Р°С‚С‹ РїРѕРёСЃРєРѕРІС‹С… Р·Р°РїСЂРѕСЃРѕРІ
+    */
+    void putAnswers(std::vector<std::vector<std::pair<int, float>>>
+                    answers);
 private:
-	Struct_Json_config obj_config;
-	std::vector<std::string> requests_vec;
+    Struct_Json_config obj_config;
+    std::vector<std::string> requests_vec;
 
-	bool read_good = false;
+    bool read_good = false;
 
-	void json_read();
+    void json_read();
 };
+
+
+
 

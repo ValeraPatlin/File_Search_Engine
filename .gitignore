@@ -53,3 +53,7 @@ Browse.VC.db
 ipch/
 x64/
 packages/
+
+.xml
+.iml
+cmake-build-debug/

@@ -7,49 +7,50 @@
 #include <set>
 #include <sstream>
 #include <cctype>
+#include <cmath>
 #include "InvertedIndex.h"
 
 struct RelativeIndex {
-	size_t doc_id;
-	float rank;
-	size_t absolute_index = 0;
+    size_t doc_id;
+    float rank;
+    size_t absolute_index = 0;
 
-	bool operator ==(const RelativeIndex& other) const {
-		return (doc_id == other.doc_id && rank == other.rank);
-	}
+    bool operator ==(const RelativeIndex& other) const {
+        return (doc_id == other.doc_id && rank == other.rank);
+    }
 
-	bool operator > (const RelativeIndex& other) const
-	{
-		return (rank > other.rank || (rank == other.rank && doc_id < other.doc_id));
-	}
+    bool operator > (const RelativeIndex& other) const
+    {
+        return (rank > other.rank || (rank == other.rank && doc_id < other.doc_id));
+    }
 
 };
 
 class SearchServer {
 public:
-	/**
-	* @param idx ‚ ÍÓÌÒÚÛÍÚÓ ÍÎ‡ÒÒ‡ ÔÂÂ‰‡∏ÚÒˇ ÒÒ˚ÎÍ‡ Ì‡ ÍÎ‡ÒÒ
-	InvertedIndex,
-	* ˜ÚÓ·˚ SearchServer ÏÓ„ ÛÁÌ‡Ú¸ ˜‡ÒÚÓÚÛ ÒÎÓ‚ ‚ÒÚÂ˜‡ÂÏ˚ı ‚
-	Á‡ÔÓÒÂ
-	*/
-	SearchServer(InvertedIndex& idx) : _index(idx) { };
-	/**
-	* ÃÂÚÓ‰ Ó·‡·ÓÚÍË ÔÓËÒÍÓ‚˚ı Á‡ÔÓÒÓ‚
-	* @param queries_input ÔÓËÒÍÓ‚˚Â Á‡ÔÓÒ˚ ‚ÁˇÚ˚Â ËÁ Ù‡ÈÎ‡
-	requests.json
-	* @return ‚ÓÁ‚‡˘‡ÂÚ ÓÚÒÓÚËÓ‚‡ÌÌ˚È ÒÔËÒÓÍ ÂÎÂ‚‡ÌÚÌ˚ı ÓÚ‚ÂÚÓ‚ ‰Îˇ
-	Á‡‰‡ÌÌ˚ı Á‡ÔÓÒÓ‚
-	*/
-	std::vector<std::vector<RelativeIndex>> search
-	(const std::vector<std::string>& queries_input);
+    /**
+    * @param idx –≤ –∫–æ–Ω—Å—Ç—Ä—É–∫—Ç–æ—Ä –∫–ª–∞—Å—Å–∞ –ø–µ—Ä–µ–¥–∞—ë—Ç—Å—è —Å—Å—ã–ª–∫–∞ –Ω–∞ –∫–ª–∞—Å—Å
+    InvertedIndex,
+    * —á—Ç–æ–±—ã SearchServer –º–æ–≥ —É–∑–Ω–∞—Ç—å —á–∞—Å—Ç–æ—Ç—É —Å–ª–æ–≤ –≤—Å—Ç—Ä–µ—á–∞–µ–º—ã—Ö –≤
+    –∑–∞–ø—Ä–æ—Å–µ
+    */
+    SearchServer(InvertedIndex& idx) : _index(idx) { };
+    /**
+    * –ú–µ—Ç–æ–¥ –æ–±—Ä–∞–±–æ—Ç–∫–∏ –ø–æ–∏—Å–∫–æ–≤—ã—Ö –∑–∞–ø—Ä–æ—Å–æ–≤
+    * @param queries_input –ø–æ–∏—Å–∫–æ–≤—ã–µ –∑–∞–ø—Ä–æ—Å—ã –≤–∑—è—Ç—ã–µ –∏–∑ —Ñ–∞–π–ª–∞
+    requests.json
+    * @return –≤–æ–∑–≤—Ä–∞—â–∞–µ—Ç –æ—Ç—Å–æ—Ä—Ç–∏—Ä–æ–≤–∞–Ω–Ω—ã–π —Å–ø–∏—Å–æ–∫ —Ä–µ–ª–µ–≤–∞–Ω—Ç–Ω—ã—Ö –æ—Ç–≤–µ—Ç–æ–≤ –¥–ª—è
+    –∑–∞–¥–∞–Ω–Ω—ã—Ö –∑–∞–ø—Ä–æ—Å–æ–≤
+    */
+    std::vector<std::vector<RelativeIndex>> search
+            (const std::vector<std::string>& queries_input);
 private:
-	InvertedIndex& _index;
+    InvertedIndex& _index;
 
-	const int max_answer = 5;
+    const int max_answer = 5;
 
-	std::set<std::string> get_uniqu_words(const std::string& request);
-	std::vector<std::pair<std::string, size_t>> get_words_entries(const std::set<std::string>& words);
-	std::vector<size_t> get_documents_words(const std::vector<std::pair<std::string, size_t>>& words);
-	size_t get_relevance_document(size_t docId, std::set<std::string>& unique_words);
+    std::set<std::string> get_uniqu_words(const std::string& request);
+    std::vector<std::pair<std::string, size_t>> get_words_entries(const std::set<std::string>& words);
+    std::vector<size_t> get_documents_words(const std::vector<std::pair<std::string, size_t>>& words);
+    size_t get_relevance_document(size_t docId, std::set<std::string>& unique_words);
 };
