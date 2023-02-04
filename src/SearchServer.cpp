@@ -1,7 +1,7 @@
-#include "SearchServer.h"
+#include "../include/SearchServer.h"
 
 std::vector<std::vector<RelativeIndex>> SearchServer::search
-        (const std::vector<std::string>& queries_input)
+(const std::vector<std::string>& queries_input)
 {
     std::vector<std::vector<RelativeIndex>> result;
 
@@ -24,10 +24,10 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search
         auto words_entries = get_words_entries(unique_words);
 
         std::sort(words_entries.begin(), words_entries.end(),
-                  [](auto& left, auto& right)
-                  {
-                      return left.second < right.second;
-                  });
+            [](auto& left, auto& right)
+            {
+                return left.second < right.second;
+            });
 
         auto document_ids_vec = get_documents_words(words_entries);
 
@@ -57,12 +57,12 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search
         {
             if (max_relevance != 0)
             {
-                float rank = static_cast<float>(relative_index_it.absolute_index) /
-                             static_cast<float>(max_relevance);
+                double rank = static_cast<double>(relative_index_it.absolute_index) /
+                    static_cast<double>(max_relevance);
 
                 int rounded = static_cast<int>(std::round(rank * 100));
 
-                rank = static_cast<float>(rounded / 100);
+                rank = static_cast<double>(rounded) / 100;
 
                 relative_index_it.rank = rank;
             }
@@ -73,11 +73,11 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search
         }
 
         std::sort(relative_indexes.begin(), relative_indexes.end(),
-                  [&relative_indexes](RelativeIndex& left, RelativeIndex& right)
-                  {
-                      return (left.rank > right.rank
-                              || (left.rank == right.rank && left.doc_id < right.doc_id));
-                  });
+            [&relative_indexes](RelativeIndex& left, RelativeIndex& right)
+            {
+                return (left.rank > right.rank
+                || (left.rank == right.rank && left.doc_id < right.doc_id));
+            });
 
         if (relative_indexes.size() > max_answer)
         {
@@ -98,10 +98,10 @@ std::set<std::string> SearchServer::get_uniqu_words(const std::string& request)
     for (std::string word; ss >> word; )
     {
         std::transform(word.begin(), word.end(), word.begin(),
-                       [](unsigned char ch)
-                       {
-                           return std::tolower(ch);
-                       });
+            [](unsigned char ch)
+            {
+                return std::tolower(ch);
+            });
 
         result.emplace(word);
     }
@@ -133,7 +133,7 @@ SearchServer::get_words_entries(const std::set<std::string>& words)
 }
 
 std::vector<size_t> SearchServer::get_documents_words
-        (const std::vector<std::pair<std::string, size_t>>& words)
+(const std::vector<std::pair<std::string, size_t>>& words)
 {
     std::vector<size_t> result;
 
@@ -146,6 +146,12 @@ std::vector<size_t> SearchServer::get_documents_words
             result.push_back(entry.doc_id);
         }
     }
+
+    std::set<size_t> doc_Id_unique(result.begin(), result.end());
+
+    result.clear();
+
+    result.assign(doc_Id_unique.begin(), doc_Id_unique.end());
 
     std::sort(result.begin(), result.end());
 
