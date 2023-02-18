@@ -1,4 +1,4 @@
-#include "../include/InvertedIndex.h"
+#include "InvertedIndex.h"
 
 InvertedIndex::InvertedIndex() = default;
 

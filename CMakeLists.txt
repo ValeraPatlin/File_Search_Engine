@@ -1,29 +1,30 @@
-cmake_minimum_required(VERSION 3.20)
-project(Final_Task_CMake)
+﻿cmake_minimum_required (VERSION 3.8)
+project("Search-Engine")
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static")
 
-add_subdirectory(nlohmann_json)
+set(MY_INCLUDE_DIR
+  ${CMAKE_SOURCE_DIR}/include
+)
+set(MY_SRC_DIR ${CMAKE_SOURCE_DIR}/src)
+
+include(FetchContent)
+
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG release-1.12.1
+)
+FetchContent_MakeAvailable(googletest)
+
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+enable_testing()
 
 add_subdirectory(src)
-
-target_link_libraries(Final_Task_CMake PRIVATE nlohmann_json::nlohmann_json)
-
-
-project(Google_tests)
-enable_testing()
-include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-add_subdirectory(${PROJECT_NAME}/lib)
-add_executable(
-        ${PROJECT_NAME}
-        Google_tests/InverterIndexTest.cpp
-        Google_tests/SearchServerTest.cpp
-        src/InvertedIndex.cpp
-        src/SearchServer.cpp
-)
-set_target_properties(${PROJECT_NAME} PROPERTIES
-        CXX_STANDARD 14
-        CXX_STANDARD_REQUIRED ON
-        )
-target_link_libraries(${PROJECT_NAME} gtest gtest_main)
+add_subdirectory(tests)
