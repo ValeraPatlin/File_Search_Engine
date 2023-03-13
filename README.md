@@ -21,9 +21,8 @@ https://github.com/google/googletest
 
 Use the default build
 
-cmake -S . -B "build"
-	cmake --build 
-	build --config Release
+	cmake -S . -B "build"
+	cmake --build build --config Release
 
 Files specification
 
