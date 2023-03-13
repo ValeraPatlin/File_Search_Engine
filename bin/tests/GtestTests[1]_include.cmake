@@ -1,0 +1,5 @@
+if(EXISTS "D:/Programming/Git Hub/File_Search_Engine/bin/tests/GtestTests[1]_tests.cmake")
+  include("D:/Programming/Git Hub/File_Search_Engine/bin/tests/GtestTests[1]_tests.cmake")
+else()
+  add_test(GtestTests_NOT_BUILT GtestTests_NOT_BUILT)
+endif()

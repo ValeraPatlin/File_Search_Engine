@@ -115,7 +115,7 @@ void ConverterJSON::text_documents()
 		if (!doc_reading.is_open())
 		{
 			cout << "\nError. File no open\n";
-			abort();
+			exit(3);
 		}
 		std::string text, buffer;
 		while (!doc_reading.eof())
@@ -158,7 +158,7 @@ void ConverterJSON::json_read()
 	if (!file)
 	{
 		cout << "File NO is open\n";
-		abort();
+		exit(2);
 	}
 	file >> config;
 	file.close();

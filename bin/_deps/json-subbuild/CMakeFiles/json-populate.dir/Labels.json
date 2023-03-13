@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/json-populate"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/f6ab74e27fdb67c055c9f4c5f3a7fec6/json-populate.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/a795a8c9484ec86eeda506d71209f18c/json-populate-complete.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-build.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-configure.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-download.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-install.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-mkdir.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-patch.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-test.rule"
+		},
+		{
+			"file" : "D:/Programming/Git Hub/File_Search_Engine/bin/_deps/json-subbuild/CMakeFiles/5c4aa5abbfc5819adc17ffc6ed8f131b/json-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"json-populate"
+		],
+		"name" : "json-populate"
+	}
+}
