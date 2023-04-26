@@ -29,11 +29,17 @@ Step 1: Build the project.
 If you use Visual Studio compiler you can build x64 or x32 version respectively:
 
 For x64 version:
+
 	cmake -A x64 -S . -B "build64"
+	
 	cmake --build build64 --config Release
+	
 For x32 version:
+
 	cmake -A Win32 -S . -B "build32"
+	
 	cmake --build build32 --config Release
+	
 In other cases use default build:
 cmake -S . -B "build"
 cmake --build build --config Release
